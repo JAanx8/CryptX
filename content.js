@@ -44,3 +44,52 @@ if ("PerformanceObserver" in window) {
     // ignore
   }
 }
+// CryptX — Mitigation: block further WebAssembly execution when instructed
+let blockWasm = false;
+
+// Listen for mitigation command from background
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg && msg.mitigate === true) {
+    blockWasm = true;
+  }
+});
+
+// Inject a blocker into page context
+(function injectWasmBlocker() {
+  const script = document.createElement("script");
+  script.textContent = `
+    (function () {
+      const origInstantiate = WebAssembly.instantiate;
+      const origCompile = WebAssembly.compile;
+
+      WebAssembly.instantiate = function (...args) {
+        if (window.__CRYPTX_BLOCK_WASM__) {
+          throw new Error("CryptX blocked WebAssembly execution");
+        }
+        return origInstantiate.apply(this, args);
+      };
+
+      WebAssembly.compile = function (...args) {
+        if (window.__CRYPTX_BLOCK_WASM__) {
+          throw new Error("CryptX blocked WebAssembly execution");
+        }
+        return origCompile.apply(this, args);
+      };
+
+      window.addEventListener("message", (e) => {
+        if (e.data && e.data.type === "CRYPTX_BLOCK_WASM") {
+          window.__CRYPTX_BLOCK_WASM__ = true;
+        }
+      });
+    })();
+  `;
+  (document.documentElement || document.head).appendChild(script);
+  script.remove();
+})();
+
+// Relay mitigation command to page context
+chrome.runtime.onMessage.addListener((msg) => {
+  if (msg && msg.mitigate === true) {
+    window.postMessage({ type: "CRYPTX_BLOCK_WASM" }, "*");
+  }
+});
