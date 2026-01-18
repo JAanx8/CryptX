@@ -1,0 +1,6 @@
+{
+  "name": "CryptX",
+  "description": "Client-side behavioral cryptojacking detection extension",
+  "version": "1.0",
+  "manifest_version": 3
+}
