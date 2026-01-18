@@ -30,7 +30,17 @@ function recomputeStatus(tabId) {
   if (s >= THRESHOLDS.MONITORING) return "MONITORING";
   return "SAFE";
 }
-
+// Respond to popup status requests
+if (msg && msg.request === "STATUS" && sender.tab) {
+  const tabId = sender.tab.id;
+  if (tabState[tabId]) {
+    chrome.runtime.sendMessage({
+      status: tabState[tabId].status,
+      score: tabState[tabId].score
+    });
+  }
+  return;
+}
 chrome.runtime.onMessage.addListener((msg, sender) => {
   if (!sender.tab) return;
   const tabId = sender.tab.id;
