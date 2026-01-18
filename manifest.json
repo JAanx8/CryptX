@@ -4,10 +4,7 @@
   "version": "1.0",
   "manifest_version": 3,
 
-  "permissions": [
-    "tabs",
-    "notifications"
-  ],
+  "permissions": ["tabs", "notifications"],
 
   "background": {
     "service_worker": "background.js"
@@ -22,6 +19,13 @@
       "matches": ["<all_urls>"],
       "js": ["content.js"],
       "run_at": "document_start"
+    }
+  ],
+
+  "web_accessible_resources": [
+    {
+      "resources": ["wasm-hook.js"],
+      "matches": ["<all_urls>"]
     }
   ]
 }
