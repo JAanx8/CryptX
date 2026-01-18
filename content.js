@@ -29,3 +29,18 @@ window.addEventListener("message", (event) => {
     chrome.runtime.sendMessage({ wasm: true });
   }
 });
+// CryptX — CPU behavior via Long Task API (heuristic)
+if ("PerformanceObserver" in window) {
+  try {
+    const observer = new PerformanceObserver((list) => {
+      for (const entry of list.getEntries()) {
+        if (entry.duration >= 50) { // long task threshold
+          chrome.runtime.sendMessage({ longTask: true });
+        }
+      }
+    });
+    observer.observe({ entryTypes: ["longtask"] });
+  } catch (e) {
+    // ignore
+  }
+}
