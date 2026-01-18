@@ -1,0 +1,1 @@
+// CryptX background service worker
