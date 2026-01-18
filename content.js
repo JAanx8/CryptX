@@ -1,0 +1,1 @@
+// CryptX content script placeholder
