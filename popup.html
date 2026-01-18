@@ -1,11 +1,31 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <title>CryptX</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 10px;
+      width: 220px;
+    }
+    h3 {
+      margin: 0 0 8px 0;
+    }
+    #status {
+      font-weight: bold;
+    }
+    #score {
+      font-size: 12px;
+      color: #555;
+    }
+  </style>
 </head>
 <body>
   <h3>CryptX</h3>
-  <p>Status: Monitoring</p>
+  <div>Status: <span id="status">Monitoring</span></div>
+  <div id="score">Score: 0</div>
+
+  <script src="popup.js"></script>
 </body>
 </html>
