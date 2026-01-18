@@ -2,5 +2,26 @@
   "name": "CryptX",
   "description": "Client-side behavioral cryptojacking detection extension",
   "version": "1.0",
-  "manifest_version": 3
+  "manifest_version": 3,
+
+  "permissions": [
+    "tabs",
+    "notifications"
+  ],
+
+  "background": {
+    "service_worker": "background.js"
+  },
+
+  "action": {
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_start"
+    }
+  ]
 }
