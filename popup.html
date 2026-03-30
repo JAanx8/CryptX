@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; transition: background 0.3s, color 0.3s, border-color 0.3s; }
+
+    /* ── DARK MODE (default) ── */
+    body {
+      width: 320px;
+      min-height: 200px;
+      background: #0d0d0d;
+      color: #fff;
+      font-family: 'Segoe UI', Arial, sans-serif;
+    }
+
+    /* ── LIGHT MODE ── */
+    body.light { background: #f5f5f5; color: #111; }
+    body.light .header { border-bottom-color: #ddd; }
+    body.light .logo { color: #00aa55; }
+    body.light .logo span { color: #111; }
+    body.light .safe-sub { color: #888; }
+    body.light .site-name { color: #aaa; }
+    body.light .footer { border-top-color: #ddd; }
+    body.light .footer-text, body.light .version { color: #aaa; }
+    body.light .history-btn { background: #eee; color: #00aa55; border-color: #00aa5533; }
+    body.light .history-btn:hover { background: #00aa5511; }
+    body.light .threat-card { background: #eee; }
+    body.light .threat-time { color: #aaa; }
+    body.light .threat-url { color: #888; }
+    body.light .danger-banner { background: linear-gradient(135deg, #fff0f0, #ffe0e0); border-bottom-color: #ff444433; }
+    body.light .risk-box { background: #eee; }
+    body.light .risk-label { color: #555; }
+
+    /* ── Header ── */
+    .header {
+      padding: 12px 16px 10px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .logo { font-size: 18px; font-weight: bold; color: #00ff88; letter-spacing: 3px; }
+    .logo span { color: #fff; }
+    body.light .logo span { color: #111; }
+
+    .header-right { display: flex; align-items: center; gap: 10px; }
+
+    /* ── Dark/Light Toggle ── */
+    .toggle-wrap { display: flex; align-items: center; gap: 6px; }
+    .toggle-icon { font-size: 13px; }
+    .toggle {
+      width: 34px; height: 18px;
+      background: #333;
+      border-radius: 9px;
+      position: relative;
+      cursor: pointer;
+      border: none;
+      outline: none;
+    }
+    body.light .toggle { background: #ccc; }
+    .toggle::after {
+      content: '';
+      position: absolute;
+      width: 14px; height: 14px;
+      background: #00ff88;
+      border-radius: 50%;
+      top: 2px; left: 2px;
+      transition: left 0.2s;
+    }
+    body.light .toggle::after { left: 18px; background: #00aa55; }
+
+    /* ── Status dot ── */
+    .status-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: #00ff88;
+      box-shadow: 0 0 8px #00ff88;
+      animation: pulse 2s infinite;
+    }
+    .status-dot.danger { background: #ff4444; box-shadow: 0 0 8px #ff4444; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+    
+
+    /* ── Safe State ── */
+    .safe-body { padding: 16px 16px; text-align: center; }
+    .shield-icon { font-size: 42px; margin-bottom: 10px; }
+    .safe-title { color: #00ff88; font-size: 15px; font-weight: bold; margin-bottom: 5px; }
+    body.light .safe-title { color: #00aa55; }
+    .safe-sub { color: #444; font-size: 11px; margin-bottom: 4px; }
+    .site-name { color: #333; font-size: 10px; }
+
+    /* ── Danger State ── */
+    .danger-banner {
+      background: linear-gradient(135deg, #1a0000, #2d0000);
+      border-bottom: 1px solid #ff444433;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .danger-icon { font-size: 24px; }
+    .danger-title { font-size: 14px; font-weight: bold; color: #ff4444; }
+    .danger-count { font-size: 11px; color: #ff666666; margin-top: 2px; }
+
+    /* ── Threat Cards ── */
+    .threats-list { padding: 10px 16px; display: flex; flex-direction: column; gap: 8px; }
+    .threat-card {
+      background: #111;
+      border-radius: 8px;
+      padding: 10px 12px;
+      border-left: 3px solid #ff4444;
+    }
+    .threat-card.wasm { border-left-color: #ff6600; }
+    .threat-card.script { border-left-color: #cc00ff; }
+    .threat-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+    .threat-badge {
+      font-size: 9px; font-weight: bold;
+      padding: 2px 7px; border-radius: 3px;
+      text-transform: uppercase; letter-spacing: 1px;
+    }
+    .badge-cpu    { background: #ff444422; color: #ff4444; border: 1px solid #ff444444; }
+    .badge-wasm   { background: #ff660022; color: #ff6600; border: 1px solid #ff660044; }
+    .badge-script { background: #cc00ff22; color: #cc00ff; border: 1px solid #cc00ff44; }
+    .threat-time { font-size: 9px; color: #333; }
+    .threat-url {
+      font-size: 10px; color: #555;
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+      max-width: 260px;
+    }
+
+    /* ── Footer ── */
+    .footer {
+      padding: 10px 16px;
+      border-top: 1px solid #1a1a1a;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-text { font-size: 9px; color: #222; }
+    .version { font-size: 9px; color: #222; }
+
+    /* ── History Button ── */
+    .history-btn {
+      width: calc(100% - 32px);
+      margin: 0 16px 12px;
+      padding: 9px;
+      background: #111;
+      color: #00ff88;
+      border: 1px solid #00ff8833;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+      letter-spacing: 1px;
+      text-align: center;
+    }
+    .history-btn:hover { background: #00ff8811; }
+  </style>
+</head>
+<body id="body">
+
+  <div class="header">
+    <div class="logo">crypt<span>X</span></div>
+    <div class="header-right">
+      <div class="toggle-wrap">
+        <span class="toggle-icon">🌙</span>
+        <button class="toggle" id="theme-toggle" title="Toggle Dark/Light mode"></button>
+        <span class="toggle-icon">☀️</span>
+      </div>
+      <div class="status-dot" id="status-dot"></div>
+    </div>
+  </div>
+
+  
+    </div>
+    <div style="font-size:28px" id="risk-emoji">🛡️</div>
+  </div>
+  
+  </div>
+
+  <div id="popup-body"></div>
+
+  <button class="history-btn" id="history-btn">📋 View Threat History</button>
+
+  <div class="footer">
+    <span class="footer-text">Behaviour-Based Protection</span>
+    <span class="version">v2.0</span>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
