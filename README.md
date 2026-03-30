@@ -70,14 +70,15 @@ CryptX/
 
 ---
 
-## Research Paper
+## Research Publications
 
-This project was published in:
-
-**IRJMETS — International Research Journal of Modernization in Engineering, Technology and Science**
+**Implementation Paper**
+IRJMETS — International Research Journal of Modernization in Engineering, Technology and Science
 Volume 8 | DOI: [10.56726/IRJMETS90927](https://www.doi.org/10.56726/IRJMETS90927)
 
-Presented at **ICAC 2026** — Bharathiar University, Coimbatore.
+**Survey Paper**
+Presented at **ICAC 2026** — International Conference on Advanced Computing
+Bharathiar University, Coimbatore | ISBN: 978-93-6126-040-7
 
 ---
 
