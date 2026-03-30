@@ -86,7 +86,7 @@ Presented at **ICAC 2026** — Bharathiar University, Coimbatore.
 **Janani Priya S**
 B.Sc. Computer Science (Cybersecurity) — Dr. N.G.P Arts and Science College, Coimbatore
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://linkedin.com/in/jananipriya)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/janani-priya-s-0a885235b)
 [![GitHub](https://img.shields.io/badge/GitHub-JAanx8-black)](https://github.com/JAanx8)
 
 ---
