@@ -42,12 +42,70 @@ CryptX detects and blocks it before it can cause damage.
 
 ## 🚀 Recent Updates
 
-- 🔍 Added search and filter system in threat history
-- 🎯 Improved history page UI and layout
-- ⚠️ Smart threat suggestions for repeated attacks
-- 🧾 Enhanced delete interaction with better UX
-- 🎨 Improved dropdown styling with dark theme and glow effects
+**History Dashboard — `history.html`**
+
+- 🔍 **Search functionality** — filter threats by domain or URL in real-time
+- 🎛️ **Dropdown filter** — filter threats by type (High CPU, WebAssembly, Miner Script, Clipboard Hijack, Web Worker)
+- 🎨 **Improved dropdown UI** — dark theme with rounded corners and neon glow styling
+- 💡 **Smart suggestion banner** — auto-recommends blocking domains with repeated threat detections
+- 🗑️ **Enhanced delete interaction** — row-based delete with improved UX behavior and confirmation flow
+- 📋 **Threat details panel** — right-side panel showing full detection info on row click
+- 📐 **Layout improvements** — better spacing, visual consistency, and overall dashboard polish
 
 ---
 
 ## File Structure
+
+```
+CryptX/
+├── manifest.json         # MV3 extension config
+├── background.js         # Service worker — core detection engine
+├── content.js            # Page-level script injection
+├── injected.js           # WASM intercept injection
+├── wasm_intercept.js     # WebAssembly API hooking
+├── popup.html/js         # Extension popup UI
+├── blocked.html/js       # Block page shown on detection
+├── history.html/js       # Threat history log
+└── icons/                # Extension icons (16, 32, 48, 128px)
+```
+
+---
+
+## Installation (Developer Mode)
+
+1. Clone this repo:
+   ```bash
+   git clone https://github.com/JAanx8/CryptX.git
+   ```
+2. Open Chrome → `chrome://extensions/`
+3. Enable **Developer Mode** (top right toggle)
+4. Click **Load unpacked** → select the `CryptX` folder
+5. Extension is active!
+
+---
+
+## Research Publications
+
+**Implementation Paper**
+IRJMETS — International Research Journal of Modernization in Engineering, Technology and Science
+Volume 8 | DOI: [10.56726/IRJMETS90927](https://www.doi.org/10.56726/IRJMETS90927)
+
+**Survey Paper**
+Presented at **ICAC 2026** — International Conference on Advanced Computing
+Bharathiar University, Coimbatore | ISBN: 978-93-6126-040-7
+
+---
+
+## Author
+
+**Janani Priya S**
+B.Sc. Computer Science (Cybersecurity) — Dr. N.G.P Arts and Science College, Coimbatore
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/janani-priya-s-0a885235b)
+[![GitHub](https://img.shields.io/badge/GitHub-JAanx8-black)](https://github.com/JAanx8)
+
+---
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
