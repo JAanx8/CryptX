@@ -598,14 +598,15 @@
     .filter-select:hover,
     .filter-select:focus {
       border-color: #00ff88;
-      box-shadow: 0 0 10px rgba(0, 255, 136, 0.2);
+      box-shadow: 0 0 12px rgba(0, 255, 136, 0.3);
     }
 
     .filter-wrapper::after {
       content: '';
       position: absolute;
-      top: 17px;
+      top: 50%;
       right: 14px;
+      transform: translateY(-50%);
       pointer-events: none;
       width: 0;
       height: 0;
@@ -618,6 +619,16 @@
       background: #0d0d0d;
       color: #eaeaea;
       padding: 10px;
+    }
+
+    .filter-select option:hover {
+      background-color: rgba(0, 255, 136, 0.15);
+    }
+
+    .filter-select option:checked {
+      background-color: #00ff88;
+      color: #050505;
+      font-weight: bold;
     }
 
     /* CPU Meter */
